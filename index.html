@@ -1,0 +1,18 @@
+<textarea id="input"></textarea>
+<button onclick="run()">Analyze</button>
+
+<pre id="output"></pre>
+
+<script>
+  async function run() {
+    const transcript = document.getElementById("input").value;
+    const res = await fetch("http://localhost:5000/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ transcript }),
+    });
+
+    const data = await res.json();
+    document.getElementById("output").innerText = data.result;
+  }
+</script>
